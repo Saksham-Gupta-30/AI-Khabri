@@ -106,7 +106,7 @@ const Popup = ({ article, setModalOpen }) => {
                         <img
                             alt={article?.title}
                             src={article?.urlToImage || Common}
-                            className="rounded-t-md w-full h-96 object-cover tilt-box"
+                            className="rounded-t-md w-full h-48 object-cover tilt-box"
                         />
                     </div>
                     <div className="h-full border-t-0 border rounded-bl-md rounded-br-md mt-0 m-3 flex flex-col overflow-auto overflow-x-none scrollBar">
