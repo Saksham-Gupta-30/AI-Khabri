@@ -14,31 +14,26 @@ const Main = ({ countryCode, category }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setLoading(true)
-        try {
-            axios.get(`${import.meta.env.VITE_BACKEND_URL}`, {
-                params: {
-                    countryCode: countryCode,
-                    category: category
-                }
-            })
-                .then((response) => {
-                    // console.log(response)
-                    setArticles(response.data.articles)
-                })
-                .catch((error) => {
-                    alert('Error fetching data')
-                    console.log(error)
-                })
-            // setArticles(sample)
-            // console.log('Articles:', sample)
-        } catch (error) {
-            console.log(error)
-            alert('Internal Server Error')
-        } finally {
-            setLoading(false)
-        }
-    }, [countryCode, category])
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/news`, {
+                    params: {
+                        countryCode: countryCode,
+                        category: category
+                    }
+                });
+                setArticles(response.data.articles);
+            } catch (error) {
+                alert('Error fetching data');
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [countryCode, category]);
 
     const handleClick = (article) => {
         setCurrentArticle(article)
